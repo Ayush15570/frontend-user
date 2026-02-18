@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import api from "../api/axios";
 import { FaPhoneAlt, FaLock, FaSearch } from "react-icons/fa";
-
+import { Link } from "react-router-dom";
 const TrackRequest = () => {
   const [phone, setPhone] = useState("");
   const [otp, setOtp] = useState("");
@@ -125,12 +125,13 @@ const TrackRequest = () => {
                   Status: {req.trackingStatus.replaceAll("_", " ")}
                 </p>
 
-                <a
-                  href={`/track/${req._id}`}
-                  className="text-sm text-indigo-500 mt-2 inline-block hover:underline"
-                >
-                  View Details →
-                </a>
+                <Link
+  to={`/track/${req._id}`}
+  className="text-sm text-indigo-500 mt-2 inline-block hover:underline"
+>
+  View Details →
+</Link>
+
               </motion.div>
             ))}
           </div>
