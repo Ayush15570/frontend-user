@@ -96,9 +96,30 @@ const Services = () => {
       <ServiceSlider />
 
       {/* TITLE */}
-      <h1 className="text-2xl sm:text-3xl font-bold mb-6">
-        {location ? `Services in ${location}` : "All Services"}
-      </h1>
+     {/* TITLE + TRACK BUTTON */}
+{/* TITLE + TRACK CTA */}
+<div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
+
+  <div>
+    <h1 className="text-2xl sm:text-3xl font-bold text-gray-800">
+      {location ? `Services in ${location}` : "All Services"}
+    </h1>
+    <p className="text-sm text-gray-500 mt-1">
+      Explore available services or track your existing request
+    </p>
+  </div>
+
+  <Link
+    to="/track"
+    className="relative inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-2xl shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 group overflow-hidden"
+  >
+    <span className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition"></span>
+    📦 Track Your Request
+  </Link>
+
+</div>
+
+
 
       {/* GRID */}
       <div className="grid grid-cols-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-6">

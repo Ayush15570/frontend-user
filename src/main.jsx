@@ -9,6 +9,8 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Hero from "./components/Hero.jsx";
 import Services from "./components/Services.jsx";
 import RequestService from "./components/RequestService.jsx";
+import TrackRequest from "./components/TrackRequest.jsx";
+import TrackDetails from "./components/TrackDetails.jsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +24,14 @@ const router = createBrowserRouter([
         path: "services/request/:serviceId/:serviceName",
         element: <RequestService />,
       },
+      {
+        path:"track",
+        element:<TrackRequest/>
+      },
+      {
+        path:"track/:requestId",
+        element:<TrackDetails/>
+      }
  ] } 
 ])
 
