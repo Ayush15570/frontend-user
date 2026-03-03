@@ -43,6 +43,7 @@ export default function Navbar() {
 
         <div className="flex items-center justify-between gap-3">
 
+          {/* LOGO */}
           <Link to="/" className="flex items-center">
             <img
               src={logo}
@@ -57,8 +58,11 @@ export default function Navbar() {
               onClick={() => setIsLocationOpen(!isLocationOpen)}
               className="flex items-center justify-between w-44 md:w-56 px-3 py-2 border border-gray-300 rounded-xl bg-white shadow-sm hover:border-indigo-400 transition text-sm md:text-base"
             >
-              📍 {location}
-                            <svg
+              <span className="flex items-center gap-2">
+                📍 {location}
+              </span>
+
+              <svg
                 className={`w-4 h-4 transition-transform ${
                   isLocationOpen ? "rotate-180" : ""
                 }`}
@@ -108,6 +112,7 @@ export default function Navbar() {
             </Link>
           </nav>
 
+          {/* HAMBURGER */}
           <button
             className="md:hidden text-2xl"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -115,6 +120,28 @@ export default function Navbar() {
             ☰
           </button>
         </div>
+
+        {/* ✅ MOBILE MENU (THIS WAS MISSING) */}
+        {isMenuOpen && (
+          <div className="md:hidden mt-4 bg-white rounded-2xl shadow-lg border border-gray-200 p-4 space-y-3">
+            <Link
+              to="/"
+              onClick={() => setIsMenuOpen(false)}
+              className="block font-medium text-gray-700 hover:text-indigo-600"
+            >
+              {t.navbar.home}
+            </Link>
+
+            <Link
+              to="/services"
+              onClick={() => setIsMenuOpen(false)}
+              className="block font-medium text-gray-700 hover:text-indigo-600"
+            >
+              {t.navbar.services}
+            </Link>
+          </div>
+        )}
+
       </div>
     </header>
   );
