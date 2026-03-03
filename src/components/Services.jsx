@@ -8,7 +8,7 @@ import { Autoplay, Navigation } from "swiper/modules";
 import { translations } from "../utils/translations";
 import "swiper/css";
 
-const BASE_URL = import.meta.env.VITE_API_URL;
+const BASE_URL = "https://kuncika-backend.onrender.com";
 
 const categories = [
   { key: "home", title: "Home Services", routes: ["cleaning", "repair", "pest-control", "cooking"] },
