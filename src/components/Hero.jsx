@@ -51,7 +51,7 @@ export default function Hero() {
             className="text-2xl md:text-3xl font-bold text-gray-900 opacity-0 animate-fadeSlideUp delay-400 text-center"
             style={{ fontFamily: "Noto Sans Devanagari, sans-serif" }}
           >
-            कुंजीका
+            कुञ्चिका
           </p>
 
           {/* HINDI TAGLINE */}
