@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
-import logo from "../assets/kunchika.png";
+import logo from "../assets/Kunchika.png";
 import { translations } from "../utils/translations";
 import { useLocation } from "react-router-dom";
 export default function Navbar() {
