@@ -1,21 +1,34 @@
 import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
-import logo from "../assets/kuncika-logo.png";
+import logo from "../assets/kunchika.png";
 import { translations } from "../utils/translations";
-
+import { useLocation } from "react-router-dom";
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLocationOpen, setIsLocationOpen] = useState(false);
   const [location, setLocation] = useState("Select Location");
   const [language, setLanguage] = useState(Cookies.get("language") || "en");
-
+  const [scrolled, setScrolled] = useState(false);
+  const Location = useLocation()
+  const isHome = Location.pathname === "/";
+  
   const t = translations[language];
 
   useEffect(() => {
     const saved = Cookies.get("location");
     setLocation(saved || t.navbar.selectLocation);
   }, [language]);
+
+  // ⭐ Scroll shadow effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleSelectLocation = (city) => {
     if (city === t.navbar.allServices) {
@@ -38,7 +51,13 @@ export default function Navbar() {
   };
 
   return (
-    <header className="w-full sticky top-0 z-50 bg-gradient-to-r from-white via-blue-50/30 to-white backdrop-blur-lg shadow-sm">
+    <header
+      className={`w-full sticky top-0 z-50 backdrop-blur-lg transition-all duration-300
+      ${scrolled
+        ? "bg-white/90 shadow-md"
+        : "bg-gradient-to-b from-white via-indigo-50 to-white"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 py-3">
 
         <div className="flex items-center justify-between gap-3">
@@ -48,12 +67,12 @@ export default function Navbar() {
             <img
               src={logo}
               alt="Kuncika Logo"
-              className="w-32 md:w-40 h-16 md:h-20 object-contain"
+              className="w-32 md:w-40 h-16 md:h-20 object-contain transition-transform hover:scale-105"
             />
           </Link>
 
           {/* LOCATION */}
-          <div className="relative">
+        { !isHome &&  ( <div className="relative">
             <button
               onClick={() => setIsLocationOpen(!isLocationOpen)}
               className="flex items-center justify-between w-44 md:w-56 px-3 py-2 border border-gray-300 rounded-xl bg-white shadow-sm hover:border-indigo-400 transition text-sm md:text-base"
@@ -80,19 +99,19 @@ export default function Navbar() {
             </button>
 
             {isLocationOpen && (
-              <div className="absolute right-0 mt-2 w-44 md:w-56 bg-white shadow-xl rounded-xl border border-gray-200 py-2 z-50">
+              <div className="absolute right-0 mt-2 w-44 md:w-56 bg-white shadow-xl rounded-xl border border-gray-200 py-2 z-50 animate-fadeIn">
                 {[t.navbar.allServices, "Bhopal", "Indore", "Delhi", "Pune"].map((city) => (
                   <button
                     key={city}
                     onClick={() => handleSelectLocation(city)}
-                    className="block w-full text-left px-4 py-2 hover:bg-gray-100"
+                    className="block w-full text-left px-4 py-2 hover:bg-gray-100 transition"
                   >
                     {city}
                   </button>
                 ))}
               </div>
             )}
-          </div>
+          </div>)}
 
           {/* LANGUAGE TOGGLE */}
           <button
@@ -104,12 +123,23 @@ export default function Navbar() {
 
           {/* DESKTOP NAV */}
           <nav className="hidden md:flex items-center gap-8 text-[17px] font-medium text-gray-700">
-            <Link to="/" className="hover:text-indigo-600 transition">
+
+            <Link
+              to="/"
+              className="relative group hover:text-indigo-600 transition"
+            >
               {t.navbar.home}
+              <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-indigo-600 transition-all group-hover:w-full"></span>
             </Link>
-            <Link to="/services" className="hover:text-indigo-600 transition">
+
+            <Link
+              to="/services"
+              className="relative group hover:text-indigo-600 transition"
+            >
               {t.navbar.services}
+              <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-indigo-600 transition-all group-hover:w-full"></span>
             </Link>
+
           </nav>
 
           {/* HAMBURGER */}
@@ -121,9 +151,9 @@ export default function Navbar() {
           </button>
         </div>
 
-        {/* ✅ MOBILE MENU (THIS WAS MISSING) */}
+        {/* MOBILE MENU */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 bg-white rounded-2xl shadow-lg border border-gray-200 p-4 space-y-3">
+          <div className="md:hidden mt-4 bg-white rounded-2xl shadow-lg border border-gray-200 p-4 space-y-3 animate-fadeIn">
             <Link
               to="/"
               onClick={() => setIsMenuOpen(false)}
