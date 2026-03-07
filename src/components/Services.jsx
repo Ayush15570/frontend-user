@@ -8,7 +8,7 @@ import { Autoplay, Navigation } from "swiper/modules";
 import { translations } from "../utils/translations";
 import "swiper/css";
 
-const BASE_URL = "https://kuncika-backend.onrender.com";
+const BASE_URL = "http://Kunchikaa-env.eba-gydrvjhb.ap-south-1.elasticbeanstalk.com/kuncika/v1/";
 
 const categories = [
   { key: "home", title: "Home Services", routes: ["cleaning", "repair", "pest-control", "cooking"] },
