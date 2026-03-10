@@ -27,7 +27,7 @@ const Services = () => {
   const [language, setLanguage] = useState(Cookies.get("language") || "en");
 
   const t = translations[language];
-  console.log("API baseURL:", api.defaults.baseURL);
+   console.log("Base url :", BASE_URL)
 
   /* -------- LISTEN LOCATION -------- */
   useEffect(() => {
