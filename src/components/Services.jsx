@@ -56,7 +56,7 @@ const Services = () => {
             ? await api.get("/service")
             : await api.get(`/service/filter?location=${location}`);
 
-        setServices(response.data.services);
+        setServices(response?.data?.services || []);
       } catch (error) {
         console.error("Error fetching services:", error);
       }
