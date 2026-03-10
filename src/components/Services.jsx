@@ -8,7 +8,8 @@ import { Autoplay, Navigation } from "swiper/modules";
 import { translations } from "../utils/translations";
 import "swiper/css";
 
-const BASE_URL = "http://Kunchikaa-env.eba-gydrvjhb.ap-south-1.elasticbeanstalk.com/kuncika/v1/";
+
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 const categories = [
   { key: "home", title: "Home Services", routes: ["cleaning", "repair", "pest-control", "cooking"] },
@@ -26,6 +27,7 @@ const Services = () => {
   const [language, setLanguage] = useState(Cookies.get("language") || "en");
 
   const t = translations[language];
+  console.log("API baseURL:", api.defaults.baseURL);
 
   /* -------- LISTEN LOCATION -------- */
   useEffect(() => {
@@ -56,13 +58,15 @@ const Services = () => {
             ? await api.get("/service")
             : await api.get(`/service/filter?location=${location}`);
 
-        setServices(response?.data?.services || []);
+        setServices(response.data.services);
+        console.log("API RESPONSE:", response.data);
       } catch (error) {
         console.error("Error fetching services:", error);
       }
     };
     fetchData();
   }, [location]);
+ 
 
   if (!services.length) {
     return (
