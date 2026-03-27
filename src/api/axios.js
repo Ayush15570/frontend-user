@@ -5,7 +5,7 @@ const api = axios.create({
     withCredentials:true
 })
 console.log("AXIOS CONFIG LOADED");
-//import.meta.env.VITE_API_URL
+
 //"http://localhost:4000/kuncika/v1/"
 
 
